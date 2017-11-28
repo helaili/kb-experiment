@@ -1,0 +1,5 @@
+id: aac-01
+type: control-group
+name: Audit Assurance & Compliance
+subname: Audit Planning
+specification: Audit plans shall be developed and maintained to address business process disruptions. Auditing plans shall focus on reviewing the effectiveness of the implementation of security operations. All audit activities must be agreed upon prior to executing any audits.
