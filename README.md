@@ -2,8 +2,8 @@
 
 ```
 gem install jekyll bundler
-git clone https://github.com/helaili/csa-experiment.git
-cd csa-experiment
+git clone https://github.com/helaili/kb-experiment.git
+cd kb-experiment
 bundle install
 ```
 
