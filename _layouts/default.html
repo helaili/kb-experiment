@@ -1,0 +1,117 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page.title}}</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="Your name goes here">
+    <meta name="copyright" content="Maybe consider a Creative Commons license">
+    <link href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{page.root}}assets/css/csa.css">
+    <link rel="stylesheet" href="{{page.root}}assets/css/foundation.css">
+    <link rel="stylesheet" href="{{page.root}}assets/css/font-awesome.css">
+    <link rel="stylesheet" href="{{page.root}}assets/css/coderay.css">
+    <link rel="stylesheet" href="{{page.root}}assets/css/normalize.css">
+</head>
+<body>
+
+
+<!-- Nav Bar -->
+
+<nav class="top-bar" data-topbar>
+    <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+            <h1>
+                <a href="{{page.root}}">{{site.title}}</a>
+            </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns" role="content">
+
+        {{ content }}
+        <ul>
+          {% for csa_cg_hash in site.data %}
+            {% assign cg = csa_cg_hash[1] %}
+            <li><a href="#{{ cg.header.id }}">{{ cg.header.name }} - {{ cg.header.subname }}</a></li>
+          {% endfor %}
+        </ul>
+
+        <ul>
+          {% for csa_cg_hash in site.data %}
+            {% assign cg = csa_cg_hash[1] %}
+            <li><h4 id="{{ cg.header.id }}">{{ cg.header.name }} - {{ cg.header.subname }}</h4></li>
+            <div class="highlight gr">{{ cg.header.specification }}</div>
+            <div>
+              {% for cg_hash in cg %}
+                {% assign csa_question = cg_hash[1] %}
+                {% if csa_question.type != "control-group" %}
+                      <div class="csa-item-container">
+                        <div class="short_response">
+                          <a href="{{ site.data_baseurl }}{{ cg.header.id }}/{{ csa_question.id }}.yaml">{% octicon question %}</a>
+                        </div>
+                        <div class="csa-item-content">
+                          {{ csa_question.question }}
+                        </div>
+                      </div>
+                      <div class="csa-item-container">
+                        <div class="short_response">
+                          <a href="{{ site.data_baseurl }}{{ cg.header.id }}/{{ csa_question.id }}.yaml">
+                            {% if csa_question.short_response != "yes" %}
+                              {% octicon check  %}
+                            {% else if csa_question.short_response != "no" %}
+                              {% octicon x %}
+                            {% else if csa_question.short_response != "n/a" %}
+                              {% octicon dash %}%}
+                            {% else %}
+                              {% octicon alert %}%}
+                            {% endif %}
+                          </a>
+                        </div>
+                        <div class="csa-item-content">
+                            {{ csa_question.public_response }}
+                        </div>
+                      </div>
+                      {% if csa_question.comment %}
+                        <div class="alert warning csa-item-comment"><p>{{ csa_question.comment }}</p></div>
+                      {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </ul>
+    </div>
+
+    <!-- End Main Content -->
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+
+<footer class="row">
+    <div class="large-12 columns">
+        <hr>
+        <div class="row">
+            <div class="large-12 columns">
+                <p>Footer</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
